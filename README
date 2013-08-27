@@ -1,0 +1,42 @@
+Tibco EMS - PHP Extension
+
+Author: Lukas Prettenthaler (http://zyclonite.net)
+Licence: GPL
+
+
+REQUIREMENTS:
+
+.) PHP Version 4+ or 5+
+.) phpize
+.) c compiler
+.) Tibco JMS client libraries
+   (tibco is a commercial tool - more information at http://www.tibco.com/)
+
+
+INSTALLATION:
+
+.) unpack
+.) phpize
+.) ./configure --with-tibco=/opt/tibco/ems/clients/c
+.) make
+.) make install
+.) activate/include module in php.ini
+
+
+FUNCTIONS:
+
+
+tibco_version();
+  Shows Version of this extension
+
+tibco_connect(string server, string user, string pass [, string ssl]);
+  Connects to Tibco EMS Server (ssl)
+
+tibco_disconnect();
+  Disconnects from Server
+
+tibco_sendmsg(string destination, string message [, bool topic]);
+  Send Message to Topic/Queue
+
+tibco_recvmsg(string destination [[, bool false], int timeout]);
+  Consume Message from Topic/Queue (timeout in milliseconds)
