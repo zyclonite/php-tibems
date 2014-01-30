@@ -27,7 +27,11 @@
 #include "php_tibco.h"
 #include "tibemsUtilities.h"
 
-static function_entry tibco_functions[] = {
+static const zend_module_dep tibco_deps[] = {
+    ZEND_MOD_END
+};
+
+static zend_function_entry tibco_functions[] = {
     PHP_FE(tibco_version, NULL)
     PHP_FE(tibco_sendmsg, NULL)
     PHP_FE(tibco_recvmsg, NULL)
@@ -37,16 +41,19 @@ static function_entry tibco_functions[] = {
 };
 
 zend_module_entry tibco_module_entry = {
-#if ZEND_MODULE_API_NO >= 20010901
+#if ZEND_MODULE_API_NO >= 20050922
+    STANDARD_MODULE_HEADER_EX, NULL,
+    tibco_deps,
+#elif ZEND_MODULE_API_NO >= 20010901
     STANDARD_MODULE_HEADER,
 #endif
     PHP_TIBCO_EXTNAME,
     tibco_functions,
     NULL,
+    PHP_MSHUTDOWN(tibco),
     NULL,
     NULL,
-    NULL,
-    NULL,
+    PHP_MINFO(tibco),
 #if ZEND_MODULE_API_NO >= 20010901
     PHP_TIBCO_VERSION,
 #endif

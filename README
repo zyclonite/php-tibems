@@ -9,6 +9,7 @@ REQUIREMENTS:
 .) PHP Version 4+ or 5+
 .) phpize
 .) c compiler
+.) libssl0.9.8
 .) Tibco JMS client libraries
    (tibco is a commercial tool - more information at http://www.tibco.com/)
 

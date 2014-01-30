@@ -29,7 +29,7 @@ if test "$PHP_TIBCO" != "no"; then
   for i in $PHP_TIBCO /usr/local /usr; do
     if test -r $i/include/tibems/tibems.h; then
       TIBCO_DIR=$i
-      TIBCO_INC_DIR=$i/include/tibems
+      TIBCO_INC_DIR=$i/include
       break
     elif test -r $i/include/tibems.h; then
       TIBCO_DIR=$i
@@ -55,15 +55,8 @@ if test "$PHP_TIBCO" != "no"; then
 
   PHP_ADD_LIBRARY_WITH_PATH($TIBCO_LIBNAME, $TIBCO_LIB_DIR, TIBCO_SHARED_LIBADD)
   PHP_ADD_INCLUDE($TIBCO_INC_DIR)
-  PHP_NEW_EXTENSION(tibco, tibco.c, $ext_shared)
+  PHP_NEW_EXTENSION(tibco, tibco.c tibemsUtilities.c, $ext_shared)
 
-  TIBCO_MODULE_TYPE=external
-  TIBCO_LIBS="-L$TIBCO_LIB_DIR -l$TIBCO_LIBNAME $TIBCO_LIBS"
-  TIBCO_INCLUDE=-I$TIBCO_INC_DIR
- 
   PHP_SUBST(TIBCO_SHARED_LIBADD)
-  PHP_SUBST_OLD(TIBCO_MODULE_TYPE)
-  PHP_SUBST_OLD(TIBCO_LIBS)
-  PHP_SUBST_OLD(TIBCO_INCLUDE)
 
 fi
